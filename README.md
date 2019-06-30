@@ -1,7 +1,108 @@
-# Awesome Project Build with TypeORM
+# TypeORM User Microservice
 
-Steps to run this project:
+A microservice to manage users built in TypeORM. (https://typeorm.io/#/)
 
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+### Requirements
+
+1. Docker (https://www.docker.com/get-started)
+2. Docker-compose (https://docs.docker.com/compose/)
+3. Npm (https://nodejs.org/en/download/)
+
+### Steps to run this project:
+
+1. Clone the repository `https://github.com/SheaMeyers/typeorm-user-microservice.git`
+2. Run `docker-compose up`
+3. That's it!  You should now have two docker containers running.  
+    - A web container that contains your running TypeScript code
+    - A postgres container that contains your database
+    
+### Usage
+
+### Get all users
+
+In your brower go to the url http://localhost:3000/users
+
+Or run the following curl command
+
+`
+curl -X GET \
+  http://localhost:3000/users/ \
+  -H 'Accept: */*' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Host: localhost:3000' \
+  -H 'Postman-Token: 782bf153-fea3-4d5c-a8e5-a1e337dee303,15cd5272-7729-46f1-934f-460492bb17af' \
+  -H 'User-Agent: PostmanRuntime/7.15.0' \
+  -H 'accept-encoding: gzip, deflate' \
+  -H 'cache-control: no-cache'
+`
+
+Or in Postman make a GET call to http://localhost:3000/users/
+
+### Get a user by id
+
+In your brower go to the url http://localhost:3000/users/1/
+
+Or run the following curl command
+
+`
+curl -X GET \
+  http://localhost:3000/users/1/ \
+  -H 'Accept: */*' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Host: localhost:3000' \
+  -H 'Postman-Token: 45ec7f14-4963-47c7-b026-4fd0a3ba0dfc,d77cc7b0-ce7f-4326-9e64-167df0a21f41' \
+  -H 'User-Agent: PostmanRuntime/7.15.0' \
+  -H 'accept-encoding: gzip, deflate' \
+  -H 'cache-control: no-cache'
+`
+
+Or in Postman make a GET call to http://localhost:3000/users/1/
+
+### Create a user
+
+Note: Only the `userName` and `password` are required.  `firstName` and `lastName` are optional
+
+Run the following curl command
+
+`
+curl -X POST \
+  http://localhost:3000/users \
+  -H 'Accept: */*' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/json' \
+  -H 'Host: localhost:3000' \
+  -H 'Postman-Token: f7f7290c-a79f-4b23-bf2b-352fb5dc18a9,9db02019-ce51-4450-8d5f-b9d05b21c4f6' \
+  -H 'User-Agent: PostmanRuntime/7.15.0' \
+  -H 'accept-encoding: gzip, deflate' \
+  -H 'cache-control: no-cache' \
+  -H 'content-length: 95' \
+  -d '{
+	"userName": "SheaTest",
+	"password": "password",
+	"firstName": "Shea",
+	"lastName": "Test"
+}'
+`
+
+or in Postman make a POST call to http://localhost:3000/users with the body
+
+`
+{
+	"userName": "SheaTest",
+	"password": "password",
+	"firstName": "Shea",
+	"lastName": "Test"
+}
+`
+
+### Notes
+
+- Password are stored encrypted using bcryptjs https://www.npmjs.com/package/bcryptjs 
+- Avatars are stored in the filesystem using a docker volumes
+- 3 test users are created when the program is launched
+- Only the `userName` and `password` are required to create a user.  
+    `firstName`, `lastName`, and `avatar` are optional.
+   
