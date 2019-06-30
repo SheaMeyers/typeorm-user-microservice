@@ -4,3 +4,6 @@ node_modules/
 build/
 tmp/
 temp/
+
+# Do not store avatars in git
+src/avatars/

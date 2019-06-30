@@ -4,7 +4,8 @@ services:
     build: .
     ports:
       - "3000:3000"
-    # volumes: TODO Add volume for storing images to filesystem
+    volumes:
+      - ./src/avatars/:/src/avatars/
     depends_on:
       - postgres
 
