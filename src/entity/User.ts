@@ -13,6 +13,11 @@ export class User {
     lastName: string;
 
     @Column()
-    age: number;
+    userName: string;
 
+    @Column()
+    password: string;
+
+    @Column()
+    avatar:string;
 }
