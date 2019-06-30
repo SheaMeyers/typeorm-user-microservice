@@ -5,6 +5,9 @@ import * as bodyParser from "body-parser";
 import {Request, Response} from "express";
 import {Routes} from "./routes";
 import {User} from "./entity/User";
+import {genSaltSync, hashSync} from "bcryptjs";
+
+let salt: string = genSaltSync(10);
 
 createConnection().then(async connection => {
 
@@ -36,14 +39,14 @@ createConnection().then(async connection => {
         firstName: "Timber",
         lastName: "Saw",
         userName: "tim1",
-        password: "timpassword",
+        password: hashSync("timpassword", salt),
         avatar: "1_avatar.jpg"
     }));
     await connection.manager.save(connection.manager.create(User, {
         firstName: "Phantom",
         lastName: "Assassin",
         userName: "ThePhantom",
-        password: "phantompassword",
+        password: hashSync("phantompassword", salt),
         avatar: "2_avatar.jpg"
     }));
 
