@@ -10,15 +10,18 @@ A microservice to manage users built in TypeORM. (https://typeorm.io/#/)
 
 ### Steps to run this project:
 
-1. Clone the repository `https://github.com/SheaMeyers/typeorm-user-microservice.git`
-2. Run `docker-compose up`
-3. That's it!  You should now have two docker containers running.  
+1. Clone the repository `git clone https://github.com/SheaMeyers/typeorm-user-microservice.git`
+2. Go into the new project directory `cd typeorm-user-microservice/`
+3. Run `docker-compose up`
+4. That's it!  The project is running!  You should now have two docker containers running:  
     - A web container that contains your running TypeScript code
     - A postgres container that contains your database
+5. To verify the project is running as expected go to http://localhost:3000/users. 
+    You should see 3 test users that were created when the project started. 
     
 ### Usage
 
-### Get all users
+#### Get all users
 
 In your brower go to the url http://localhost:3000/users
 
@@ -39,7 +42,7 @@ curl -X GET \
 
 Or in Postman make a GET call to http://localhost:3000/users/
 
-### Get a user by id
+#### Get a user by id
 
 In your brower go to the url http://localhost:3000/users/1/
 
@@ -60,7 +63,7 @@ curl -X GET \
 
 Or in Postman make a GET call to http://localhost:3000/users/1/
 
-### Create a user
+#### Create a user
 
 Note: Only the `userName` and `password` are required.  `firstName` and `lastName` are optional
 
@@ -101,7 +104,7 @@ or in Postman make a POST call to http://localhost:3000/users with the body
 ### Notes
 
 - Password are stored encrypted using bcryptjs https://www.npmjs.com/package/bcryptjs 
-- Avatars are stored in the filesystem using a docker volumes
+- Avatars are stored in the filesystem using a docker volume (https://docs.docker.com/storage/volumes/)
 - 3 test users are created when the program is launched
 - Only the `userName` and `password` are required to create a user.  
     `firstName`, `lastName`, and `avatar` are optional.

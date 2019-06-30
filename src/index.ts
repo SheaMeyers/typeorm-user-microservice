@@ -34,25 +34,29 @@ createConnection().then(async connection => {
     // start express server
     app.listen(3000);
 
-    // insert new users for test
-    await connection.manager.save(connection.manager.create(User, {
-        firstName: "Timber",
-        lastName: "Saw",
-        userName: "tim1",
-        password: hashSync("timpassword", salt),
-        avatar: "1_avatar.jpg"
-    }));
-    await connection.manager.save(connection.manager.create(User, {
-        firstName: "Phantom",
-        lastName: "Assassin",
-        userName: "ThePhantom",
-        password: hashSync("phantompassword", salt),
-        avatar: "2_avatar.jpg"
-    }));
-    await connection.manager.save(connection.manager.create(User, {
-        userName: "JustUserName",
-        password: hashSync("justpassword", salt),
-    }));
+    try {
+        // insert new users for test
+        await connection.manager.save(connection.manager.create(User, {
+            firstName: "Timber",
+            lastName: "Saw",
+            userName: "tim1",
+            password: hashSync("timpassword", salt),
+            avatar: "1_avatar.jpg"
+        }));
+        await connection.manager.save(connection.manager.create(User, {
+            firstName: "Phantom",
+            lastName: "Assassin",
+            userName: "ThePhantom",
+            password: hashSync("phantompassword", salt),
+            avatar: "2_avatar.jpg"
+        }));
+        await connection.manager.save(connection.manager.create(User, {
+            userName: "JustUserName",
+            password: hashSync("justpassword", salt),
+        }));
+    } catch (e) {
+        console.log("Failed to create test users. Likely they already exist in the database.")
+    }
 
     console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
 
