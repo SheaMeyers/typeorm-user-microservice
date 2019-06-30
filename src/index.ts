@@ -7,7 +7,7 @@ import {Routes} from "./routes";
 import {User} from "./entity/User";
 import {genSaltSync, hashSync} from "bcryptjs";
 
-let salt: string = genSaltSync(10);
+const salt: string = genSaltSync(10);
 
 createConnection().then(async connection => {
 
@@ -48,6 +48,10 @@ createConnection().then(async connection => {
         userName: "ThePhantom",
         password: hashSync("phantompassword", salt),
         avatar: "2_avatar.jpg"
+    }));
+    await connection.manager.save(connection.manager.create(User, {
+        userName: "JustUserName",
+        password: hashSync("justpassword", salt),
     }));
 
     console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
